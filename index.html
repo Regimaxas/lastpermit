@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>LASTPERMIT — Verified roof-age addresses in Orlando</title>
+  <meta name="description" content="Verified Orlando addresses where the roof is 14–18 years old and no later roof permit was found. One roofing contractor per Commissioner District.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#ECEEEA; --panel:#F7F8F6; --ink:#17232A; --muted:#4C5B60;
+      --line:#CBD2CC; --pine:#2C5A4A; --pine-soft:#DCE7E1;
+      --rust:#9E4420; --rust-soft:#F0DFD7;
+    }
+    html.dark {
+      --bg:#12191C; --panel:#182126; --ink:#E6ECE8; --muted:#9AAAA6;
+      --line:#2E3C40; --pine:#7FBBA2; --pine-soft:#1D3730;
+      --rust:#E0865E; --rust-soft:#35231D;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:"Source Sans 3",sans-serif; font-size:18px; line-height:1.48;
+    }
+    a { color:inherit; }
+    .wrap { width:min(calc(100% - 40px),var(--max)); margin:auto; }
+    .mono {
+      font-family:"IBM Plex Mono",monospace;
+      font-size:.74rem; letter-spacing:.13em; text-transform:uppercase;
+    }
+    header {
+      position:sticky;
+      top:0;
+      z-index:1000;
+      border-bottom:1px solid var(--line);
+      padding:16px 0;
+      background:color-mix(in srgb,var(--bg) 94%,transparent);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .logo {
+      text-decoration:none; font-family:"Archivo",sans-serif; font-weight:700;
+      font-size:1.2rem; letter-spacing:-.045em;
+    }
+    .logo span { color:var(--pine); }
+    .theme-toggle {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:38px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--ink);
+      cursor:pointer;
+      font-family:"IBM Plex Mono",monospace;
+      font-size:.68rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:background .15s ease,border-color .15s ease;
+    }
+    .theme-toggle:hover { border-color:var(--pine); }
+    .theme-icon { font-size:1rem; line-height:1; }
+
+    section { padding:76px 0; border-bottom:1px solid var(--line); }
+    .hero { padding:92px 0 82px; }
+    h1,h2,h3 { font-family:"Archivo",sans-serif; margin:0; letter-spacing:-.035em; line-height:1.02; }
+    h1 { font-size:clamp(2.8rem,7vw,5.8rem); max-width:930px; }
+    h2 { font-size:clamp(2rem,4vw,3.4rem); max-width:760px; }
+    h3 { font-size:1.25rem; }
+    .eyebrow { color:var(--pine); margin-bottom:18px; }
+    .lede { font-size:clamp(1.15rem,2vw,1.4rem); color:var(--muted); max-width:700px; margin:26px 0 0; }
+    .cta-row { display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; min-height:48px;
+      padding:11px 17px; border:1px solid var(--pine); background:var(--pine);
+      color:#fff; text-decoration:none; font-family:"IBM Plex Mono",monospace;
+      font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .btn.alt { background:transparent; color:var(--ink); border-color:var(--line); }
+    .stat-strip {
+      display:grid; grid-template-columns:repeat(3,1fr); margin-top:62px;
+      border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    }
+    .stat { padding:22px 18px 22px 0; border-right:1px solid var(--line); }
+    .stat:last-child { border-right:0; padding-left:18px; }
+    .stat:nth-child(2) { padding-left:18px; }
+    .big { display:block; font-family:"IBM Plex Mono",monospace; font-size:clamp(1.5rem,3vw,2.35rem); margin-bottom:5px; }
+    .small { color:var(--muted); font-size:.92rem; }
+    .section-head { display:grid; grid-template-columns:.55fr 1fr; gap:40px; margin-bottom:42px; }
+    .section-copy { color:var(--muted); max-width:680px; }
+    .law {
+      display:grid; grid-template-columns:1.15fr .85fr; gap:0;
+      border:1px solid var(--line); background:var(--panel);
+    }
+    .law-main,.law-side { padding:30px; }
+    .law-side { border-left:1px solid var(--line); background:var(--pine-soft); }
+    .law-number { font-family:"IBM Plex Mono",monospace; font-size:clamp(2rem,5vw,4rem); color:var(--pine); }
+    .law p { margin:10px 0 0; }
+    .funnel { border-top:1px solid var(--line); }
+    .funnel-row {
+      display:grid; grid-template-columns:105px 1fr 85px; align-items:center; gap:18px;
+      padding:18px 0; border-bottom:1px solid var(--line);
+    }
+    .funnel-num { font-family:"IBM Plex Mono",monospace; font-size:1.35rem; text-align:right; }
+    .bar-track { height:13px; background:var(--line); }
+    .bar { height:100%; background:var(--pine); }
+    .funnel-label { font-size:1rem; }
+    .funnel-note { color:var(--muted); font-size:.86rem; display:block; }
+    .check {
+      background:var(--ink); color:var(--bg); border-bottom:0;
+    }
+    .check .eyebrow { color:var(--pine); }
+    .check-grid { display:grid; grid-template-columns:1fr .75fr; gap:56px; align-items:start; }
+    .check p { color:var(--muted); max-width:650px; }
+    .check blockquote {
+      margin:28px 0 0; padding:24px 0 0; border-top:1px solid #526064;
+      font-family:"Archivo",sans-serif; font-size:clamp(1.45rem,3vw,2.3rem); line-height:1.12;
+    }
+    .lookup {
+      border:1px solid #526064; padding:22px;
+      font-family:"IBM Plex Mono",monospace; font-size:.78rem; overflow-wrap:anywhere;
+    }
+    .lookup a { color:var(--pine); }
+    .example-wrap { overflow-x:auto; border:1px solid var(--line); background:var(--panel); }
+    table { width:100%; border-collapse:collapse; min-width:720px; font-size:.9rem; }
+    th,td { padding:14px 15px; text-align:left; border-bottom:1px solid var(--line); }
+    th { font-family:"IBM Plex Mono",monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    tr:last-child td { border-bottom:0; }
+    .example-label { margin-bottom:10px; color:var(--rust); }
+    .pricing {
+      display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line); background:var(--panel);
+    }
+    .price-box { padding:34px; }
+    .price-box + .price-box { border-left:1px solid var(--line); }
+    .price { font-family:"IBM Plex Mono",monospace; font-size:clamp(2.2rem,5vw,4rem); color:var(--pine); line-height:1; }
+    .price-sub { color:var(--muted); margin-top:8px; }
+    ul.clean { list-style:none; padding:0; margin:25px 0 0; }
+    ul.clean li { padding:11px 0; border-top:1px solid var(--line); }
+    ul.clean li::before { content:"+"; color:var(--pine); font-family:"IBM Plex Mono",monospace; margin-right:9px; }
+    .honest { background:var(--rust-soft); border-bottom:1px solid var(--line); }
+    .honest-grid { display:grid; grid-template-columns:.7fr 1.3fr; gap:50px; }
+    .honest ul { margin:0; padding:0; list-style:none; }
+    .honest li { padding:18px 0; border-top:1px solid color-mix(in srgb,var(--rust) 35%,transparent); }
+    .honest strong { display:block; font-family:"Archivo",sans-serif; margin-bottom:4px; }
+    footer { padding:32px 0 46px; }
+    .footer-row { display:flex; justify-content:space-between; gap:20px; color:var(--muted); font-size:.85rem; }
+    .districts { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+    .tag { border:1px solid var(--line); padding:8px 10px; font-family:"IBM Plex Mono",monospace; font-size:.68rem; }
+    @media (max-width:720px) {
+      .wrap { width:min(calc(100% - 28px),var(--max)); }
+      section { padding:55px 0; }
+      .hero { padding:65px 0 55px; }
+      .stat-strip,.section-head,.law,.check-grid,.pricing,.honest-grid { grid-template-columns:1fr; }
+      .stat,.stat:nth-child(2),.stat:last-child { border-right:0; border-bottom:1px solid var(--line); padding:18px 0; }
+      .stat:last-child { border-bottom:0; }
+      .law-side,.price-box + .price-box { border-left:0; border-top:1px solid var(--line); }
+      .law-main,.law-side,.price-box { padding:24px; }
+      .section-head { gap:18px; margin-bottom:30px; }
+      .funnel-row { grid-template-columns:70px 1fr 62px; gap:10px; }
+      .funnel-num { font-size:1rem; }
+      .funnel-label { font-size:.9rem; }
+      .funnel-note { font-size:.76rem; }
+      .footer-row { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#">LAST<span>PERMIT</span></a>
+      <button class="theme-toggle" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Switch theme">
+        <span class="theme-icon" aria-hidden="true">☾</span>
+        <span class="theme-label">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow mono">ORLANDO · ROOF AGE · VERIFIED ADDRESSES</div>
+        <h1>Houses with old roofs.<br>Already filtered.</h1>
+        <p class="lede">We take Orlando's roof permits, check each house against later permits, and remove the ones already re-roofed. What remains is a list of houses with a known 14–18-year-old roof.</p>
+        <div class="cta-row">
+          <a class="btn" href="#price">See the list</a>
+          <a class="btn alt" href="#check">Check the work</a>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><span class="big">87,764</span><span class="small">roof permits in the source record, 1992–2026</span></div>
+          <div class="stat"><span class="big">2,218</span><span class="small">houses surviving the citywide filtering</span></div>
+          <div class="stat"><span class="big">68 / 100</span><span class="small">candidate houses thrown away</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow mono">THE 15-YEAR FACT</div>
+          <div class="section-copy">Florida's roof-insurance rule gives homeowners a statutory protection based on roof age. At 15 years, that age-based protection ends. It does not mean an insurer must drop the homeowner.</div>
+        </div>
+        <div class="law">
+          <div class="law-main">
+            <div class="law-number">15 years</div>
+            <p><strong>Florida Statute 627.7011(5)</strong> says an insurer may not refuse to issue or renew a homeowner's policy on a roof less than 15 years old on age grounds alone.</p>
+          </div>
+          <div class="law-side">
+            <div class="mono">What expires</div>
+            <p>The statutory shield. A homeowner can still have the roof inspected at their own expense, and a roof shown to have 5+ years of useful life remaining stays protected.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow mono">THE FILTER</div>
+            <h2>2,065 houses entered. 660 made the list.</h2>
+          </div>
+          <div class="section-copy">District 3. Roof permits from 2008–2012. Every address was checked against later permits, then screened down to the houses we can stand behind.</div>
+        </div>
+        <div class="funnel">
+          <div class="funnel-row">
+            <div class="funnel-num">2,065</div>
+            <div><div class="bar-track"><div class="bar" style="width:100%"></div></div><div class="funnel-label">houses with a roof permit in the window</div></div>
+            <div class="mono">100%</div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-num">1,019</div>
+            <div><div class="bar-track"><div class="bar" style="width:49.3%"></div></div><div class="funnel-label">still on the same roof</div></div>
+            <div class="mono">49.3%</div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-num">969</div>
+            <div><div class="bar-track"><div class="bar" style="width:46.9%"></div></div><div class="funnel-label">after churches, schools, condos and shops come out</div></div>
+            <div class="mono">46.9%</div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-num">802</div>
+            <div><div class="bar-track"><div class="bar" style="width:38.8%"></div></div><div class="funnel-label">after removing roofs whose age we cannot stand behind</div></div>
+            <div class="mono">38.8%</div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-num">660</div>
+            <div><div class="bar-track"><div class="bar" style="width:32%"></div></div><div class="funnel-label"><strong>owner-occupied addresses delivered</strong></div></div>
+            <div class="mono">32.0%</div>
+          </div>
+        </div>
+        <div class="districts">
+          <span class="tag">D1 · 486 / 933 · 52%</span>
+          <span class="tag">D3 · 660 / 2,065 · 32%</span>
+          <span class="tag">D4 · 532 / 1,874 · 28%</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="check">
+      <div class="wrap">
+        <div class="check-grid">
+          <div>
+            <div class="eyebrow mono">CHECK IT YOURSELF</div>
+            <h2>Don't take my word for it.</h2>
+            <blockquote>Every row has the permit number. Put it into the city's lookup and you will see exactly what I saw.</blockquote>
+          </div>
+          <div>
+            <p>Orlando's permit records are public. We are not selling access to them. We are selling the work of joining the history back onto itself and throwing out the houses that have already been done.</p>
+            <div class="lookup">
+              CITY PERMIT LOOKUP<br><br>
+              <a href="https://permitlookup.cityoforlando.net/" target="_blank" rel="noopener">permitlookup.cityoforlando.net</a><br><br>
+              Your spreadsheet carries the permit number for every address.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow mono">WHAT IS IN A ROW</div>
+            <h2>Enough to work the address. Enough to verify it.</h2>
+          </div>
+          <div class="section-copy">Every delivered row includes the permit trail and the contact fields needed to work it. Example addresses below are fictional and are not client data.</div>
+        </div>
+        <div class="example-label mono">EXAMPLE ROWS · NOT REAL CLIENT DATA</div>
+        <div class="example-wrap">
+          <table>
+            <thead>
+              <tr><th>Address</th><th>Neighbourhood</th><th>Roof permit</th><th>Age</th><th>Cost then</th><th>Permit no.</th><th>Owner</th><th>Phone</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>123 Example Ave</td><td>District 3</td><td>04/2011</td><td>15.4 yr</td><td>$8,900</td><td>EXAMPLE-001</td><td>Example Owner</td><td>Not real</td></tr>
+              <tr><td>456 Sample St</td><td>District 3</td><td>09/2009</td><td>17.0 yr</td><td>$6,750</td><td>EXAMPLE-002</td><td>Sample Owner</td><td>Not real</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="price">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow mono">THE OFFER</div>
+            <h2>No dashboard. No shared leads.</h2>
+          </div>
+          <div class="section-copy">One roofing contractor per Commissioner District. The spreadsheet arrives by email. You can cancel any month.</div>
+        </div>
+        <div class="pricing">
+          <div class="price-box">
+            <div class="mono">FOUNDING RATE</div>
+            <div class="price">$245</div>
+            <div class="price-sub">per month · held for the first two districts</div>
+            <ul class="clean">
+              <li><strong>80 verified addresses</strong> on day one</li>
+              <li><strong>At least 40 new addresses</strong> every month after</li>
+              <li>Removals, re-screened phone numbers and houses newly crossing fifteen years</li>
+              <li>One contractor per Commissioner District</li>
+              <li><strong>$5 credit</strong> for any address you find has already been re-roofed. No limit.</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="mono">ANNUAL</div>
+            <div class="price">$2,450</div>
+            <div class="price-sub">two months free</div>
+            <ul class="clean">
+              <li>Cancel any month</li>
+              <li>Full refund if requested within the first 30 days</li>
+              <li>Whichever rate you start on, you keep</li>
+              <li>Districts available: 1, 3 and 4</li>
+              <li>Spreadsheet by email. Nothing to log into.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="small" style="margin-top:18px">After the founding allocation, the monthly rate is $395.</p>
+      </div>
+    </section>
+
+    <section class="honest">
+      <div class="wrap honest-grid">
+        <div>
+          <div class="eyebrow mono">THE HONEST PART</div>
+          <h2>Know what you're buying.</h2>
+        </div>
+        <ul>
+          <li><strong>These are not inbound leads.</strong> Nobody on the list asked for a quote. They are houses where the roof age is known and no later roof permit was found.</li>
+          <li><strong>It is not every house.</strong> Plenty of re-roofs happen without a permit. This is a filtered subset of what the city has on record, never a census.</li>
+          <li><strong>At fifteen, protection expires. Nothing is forced.</strong> The insurance rule does not mean an insurer must drop the homeowner.</li>
+          <li><strong>Do-not-call screening is hygiene, not compliance cover.</strong> The contractor must still access the FTC registry under their own SAN within 31 days of dialing and screen against Florida's current FDACS quarterly list. A vendor's screening does not transfer.</li>
+          <li><strong>We do not call homeowners.</strong> The list is yours to work however you work.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow mono">WHY THE NUMBERS WORK</div>
+            <h2>One exclusive contact costs $3.06 in month one.</h2>
+          </div>
+          <div class="section-copy">At $245/month with 80 addresses in the first delivery. By month twelve, with at least 40 new addresses each month, the delivered-address cost falls to about $0.51.</div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><span class="big">$3.06</span><span class="small">per exclusive contact in month one</span></div>
+          <div class="stat"><span class="big">~$0.51</span><span class="small">per delivered address by month twelve</span></div>
+          <div class="stat"><span class="big">$25–90</span><span class="small">typical shared marketplace lead price</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="wrap footer-row">
+      <div><strong>LASTPERMIT</strong> · Orlando roof-age data, filtered against later permits.</div>
+      <div>Contact: use the owner email configured for this site.</div>
+    </div>
+  </footer>
+
+<script>
+  function setTheme(theme) {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('lastpermit-theme', theme);
+
+    const dark = theme === 'dark';
+    document.querySelector('.theme-icon').textContent = dark ? '☀' : '☾';
+    document.querySelector('.theme-label').textContent = dark ? 'Light' : 'Dark';
+    document.getElementById('themeToggle').setAttribute(
+      'aria-label',
+      dark ? 'Switch to light mode' : 'Switch to dark mode'
+    );
+  }
+
+  function toggleTheme() {
+    setTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark');
+  }
+
+  const savedTheme = localStorage.getItem('lastpermit-theme');
+  setTheme(savedTheme || 'light');
+</script>
+
+</body>
+</html>
