@@ -6,352 +6,372 @@
   <meta name="color-scheme" content="light dark">
   <title>LASTPERMIT — Verified roof-age addresses in Orlando</title>
   <meta name="description" content="Verified Orlando addresses where the roof is 14–18 years old and no later roof permit was found. One roofing contractor per Commissioner District.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23244c3b'/%3E%3Ctext x='9' y='24' font-family='Arial' font-size='23' font-weight='700' fill='%23f4f6ed'%3EL%3C/text%3E%3C/svg%3E">
+  <script>
+    try {
+      document.documentElement.classList.toggle('dark', localStorage.getItem('lastpermit-theme') === 'dark');
+    } catch (_) {}
+  </script>
   <style>
     :root {
-      --bg:#ECEEEA; --panel:#F7F8F6; --ink:#17232A; --muted:#4C5B60;
-      --line:#CBD2CC; --pine:#2C5A4A; --pine-soft:#DCE7E1;
-      --rust:#9E4420; --rust-soft:#F0DFD7;
+      color-scheme:light;
+      --bg:#F0F2EC; --panel:#FAFBF7; --ink:#1B2B24; --muted:#52635A;
+      --line:#C8D1C6; --pine:#244C3B; --pine-soft:#E1EBDD;
+      --rust:#974222; --rust-soft:#F1E4DB; --focus:#974222;
+      --deep:#193C2D; --on-deep:#F4F6ED; --deep-muted:#C3D2C2;
+      --deep-accent:#C2DFAC; --deep-line:#557462;
+      --sans:Arial,Helvetica,sans-serif;
+      --mono:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;
+      --radius:8px; --ease:cubic-bezier(.22,1,.36,1);
+      --shadow:0 16px 40px -28px #18382645;
     }
     html.dark {
-      --bg:#12191C; --panel:#182126; --ink:#E6ECE8; --muted:#9AAAA6;
-      --line:#2E3C40; --pine:#7FBBA2; --pine-soft:#1D3730;
-      --rust:#E0865E; --rust-soft:#35231D;
+      color-scheme:dark;
+      --bg:#101B16; --panel:#17271E; --ink:#EDF2E8; --muted:#B0BFB2;
+      --line:#3E5144; --pine:#B7D8AD; --pine-soft:#243D2C;
+      --rust:#F0AC88; --rust-soft:#30251E; --focus:#F0AC88;
+      --shadow:0 16px 40px -28px #0009;
     }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body {
-      margin:0; background:var(--bg); color:var(--ink);
-      font-family:"Source Sans 3",sans-serif; font-size:18px; line-height:1.48;
-    }
-    a { color:inherit; }
-    .wrap { width:min(calc(100% - 40px),var(--max)); margin:auto; }
-    .mono {
-      font-family:"IBM Plex Mono",monospace;
-      font-size:.74rem; letter-spacing:.13em; text-transform:uppercase;
-    }
-    header {
-      position:sticky;
-      top:0;
-      z-index:1000;
-      border-bottom:1px solid var(--line);
-      padding:16px 0;
-      background:color-mix(in srgb,var(--bg) 94%,transparent);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-    }
-    .nav { display:flex; align-items:center; justify-content:space-between; gap:24px; }
-    .logo {
-      text-decoration:none; font-family:"Archivo",sans-serif; font-weight:700;
-      font-size:1.2rem; letter-spacing:-.045em;
-    }
+    *,*::before,*::after { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    html { scroll-behavior:smooth; scroll-padding-top:104px; scrollbar-gutter:stable; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:1rem/1.6 var(--sans); -webkit-font-smoothing:antialiased; }
+    body,button,a { -webkit-tap-highlight-color:transparent; }
+    button,a { touch-action:manipulation; }
+    button { font:inherit; }
+    a { color:inherit; text-underline-offset:5px; }
+    button { cursor:pointer; }
+    svg { display:block; width:20px; height:20px; flex-shrink:0; }
+    ::selection { background:var(--pine); color:var(--bg); }
+    :focus-visible { outline:3px solid var(--focus); outline-offset:5px; }
+    [tabindex="-1"]:focus:not(:focus-visible) { outline:none; }
+    .wrap { width:min(calc(100% - 40px),1248px); margin-inline:auto; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+    .skip-link { position:fixed; top:12px; left:16px; z-index:110; min-height:48px; padding:12px 18px; background:var(--panel); transform:translateY(-160%); }
+    .skip-link:focus { transform:translateY(0); }
+    .mono,.eyebrow { font-family:var(--mono); font-size:.75rem; font-weight:500; line-height:1.5; letter-spacing:.08em; text-transform:uppercase; }
+    .eyebrow { margin:0 0 24px; color:var(--pine); }
+    h1,h2,h3,p { margin:0; }
+    h1,h2,h3 { text-wrap:balance; overflow-wrap:break-word; }
+    h1,h2 { font-weight:600; letter-spacing:-.055em; }
+    h1 { font-size:clamp(2.65rem,10.7vw,4.25rem); line-height:1.04; }
+    h1 span { color:var(--pine); }
+    h2 { font-size:clamp(2rem,7.7vw,3.25rem); line-height:1.1; }
+    h3 { font-size:1.15rem; line-height:1.3; }
+    p { text-wrap:pretty; }
+    .small { font-size:.875rem; line-height:1.6; color:var(--muted); }
+    .site-header { position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--line); }
+    .header-inner { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .logo { display:inline-flex; align-items:center; min-height:48px; font-weight:800; font-size:1.2rem; letter-spacing:-.06em; text-decoration:none; }
     .logo span { color:var(--pine); }
-    .theme-toggle {
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      min-height:38px;
-      padding:8px 12px;
-      border:1px solid var(--line);
-      background:var(--panel);
-      color:var(--ink);
-      cursor:pointer;
-      font-family:"IBM Plex Mono",monospace;
-      font-size:.68rem;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      transition:background .15s ease,border-color .15s ease;
-    }
-    .theme-toggle:hover { border-color:var(--pine); }
-    .theme-icon { font-size:1rem; line-height:1; }
-
-    section { padding:76px 0; border-bottom:1px solid var(--line); }
-    .hero { padding:92px 0 82px; }
-    h1,h2,h3 { font-family:"Archivo",sans-serif; margin:0; letter-spacing:-.035em; line-height:1.02; }
-    h1 { font-size:clamp(2.8rem,7vw,5.8rem); max-width:930px; }
-    h2 { font-size:clamp(2rem,4vw,3.4rem); max-width:760px; }
-    h3 { font-size:1.25rem; }
-    .eyebrow { color:var(--pine); margin-bottom:18px; }
-    .lede { font-size:clamp(1.15rem,2vw,1.4rem); color:var(--muted); max-width:700px; margin:26px 0 0; }
-    .cta-row { display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; }
-    .btn {
-      display:inline-flex; align-items:center; justify-content:center; min-height:48px;
-      padding:11px 17px; border:1px solid var(--pine); background:var(--pine);
-      color:#fff; text-decoration:none; font-family:"IBM Plex Mono",monospace;
-      font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
-    }
+    .header-actions { display:flex; gap:8px; align-items:center; }
+    .desktop-nav { display:none; }
+    .icon-button,.theme-toggle { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-width:44px; min-height:44px; border:1px solid var(--line); border-radius:4px; background:var(--panel); color:var(--ink); }
+    .theme-toggle { width:44px; padding:0; }
+    .theme-label { display:none; font: .75rem/1 var(--mono); }
+    .theme-icon { display:grid; place-items:center; width:20px; height:24px; font-size:1.25rem; line-height:1; }
+    .menu-toggle { padding:10px; }
+    .menu-toggle svg { width:22px; }
+    html.menu-open,html.menu-open body { overflow:hidden; }
+    .menu { position:fixed; inset:0; width:100%; height:100%; height:100dvh; max-width:none; max-height:none; padding:0; margin:0; border:0; background:transparent; color:var(--ink); }
+    .menu::backdrop { background:#07191099; }
+    .menu-panel { width:calc(100% - 24px); max-width:440px; min-height:100%; margin-left:auto; padding:24px; background:var(--panel); border-left:1px solid var(--line); }
+    .menu[open] .menu-panel { animation:menu-in .2s var(--ease) both; }
+    .menu.is-closing .menu-panel { animation:menu-out .18s ease both; }
+    .menu-top { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:32px; border-bottom:1px solid var(--line); }
+    .menu-title { font-size:1rem; font-weight:800; letter-spacing:-.04em; }
+    .mobile-nav { display:grid; margin-top:24px; }
+    .mobile-nav a { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:88px; padding:16px 0; border-bottom:1px solid var(--line); font-size:1.6rem; font-weight:600; letter-spacing:-.04em; text-decoration:none; }
+    .mobile-nav a::after { content:"↗"; color:var(--pine); }
+    @keyframes menu-in { from { opacity:0; transform:translateX(32px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes menu-out { to { opacity:0; transform:translateX(32px); } }
+    section { padding-block:64px; border-bottom:1px solid var(--line); }
+    .hero { padding-top:40px; padding-bottom:48px; }
+    .hero-grid { display:grid; gap:40px; }
+    .hero-grid > *, .section-head > *, .check-grid > *, .honest-grid > *, .pricing > * { min-width:0; }
+    .hero .eyebrow { max-width:29rem; }
+    .lede { max-width:38rem; margin-top:24px; font-size:1.0625rem; line-height:1.7; color:var(--muted); }
+    .cta-row { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+    .btn { display:inline-flex; flex:1 1 100%; align-items:center; justify-content:space-between; gap:24px; min-height:56px; padding:14px 20px; border:1px solid var(--pine); border-radius:4px; background:var(--pine); color:var(--bg); text-decoration:none; font:500 .8125rem/1.5 var(--mono); }
     .btn.alt { background:transparent; color:var(--ink); border-color:var(--line); }
-    .stat-strip {
-      display:grid; grid-template-columns:repeat(3,1fr); margin-top:62px;
-      border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    }
-    .stat { padding:22px 18px 22px 0; border-right:1px solid var(--line); }
-    .stat:last-child { border-right:0; padding-left:18px; }
-    .stat:nth-child(2) { padding-left:18px; }
-    .big { display:block; font-family:"IBM Plex Mono",monospace; font-size:clamp(1.5rem,3vw,2.35rem); margin-bottom:5px; }
-    .small { color:var(--muted); font-size:.92rem; }
-    .section-head { display:grid; grid-template-columns:.55fr 1fr; gap:40px; margin-bottom:42px; }
-    .section-copy { color:var(--muted); max-width:680px; }
-    .law {
-      display:grid; grid-template-columns:1.15fr .85fr; gap:0;
-      border:1px solid var(--line); background:var(--panel);
-    }
-    .law-main,.law-side { padding:30px; }
-    .law-side { border-left:1px solid var(--line); background:var(--pine-soft); }
-    .law-number { font-family:"IBM Plex Mono",monospace; font-size:clamp(2rem,5vw,4rem); color:var(--pine); }
-    .law p { margin:10px 0 0; }
-    .funnel { border-top:1px solid var(--line); }
-    .funnel-row {
-      display:grid; grid-template-columns:105px 1fr 85px; align-items:center; gap:18px;
-      padding:18px 0; border-bottom:1px solid var(--line);
-    }
-    .funnel-num { font-family:"IBM Plex Mono",monospace; font-size:1.35rem; text-align:right; }
-    .bar-track { height:13px; background:var(--line); }
-    .bar { height:100%; background:var(--pine); }
-    .funnel-label { font-size:1rem; }
-    .funnel-note { color:var(--muted); font-size:.86rem; display:block; }
-    .check {
-      background:var(--ink); color:var(--bg); border-bottom:0;
-    }
-    .check .eyebrow { color:var(--pine); }
-    .check-grid { display:grid; grid-template-columns:1fr .75fr; gap:56px; align-items:start; }
-    .check p { color:var(--muted); max-width:650px; }
-    .check blockquote {
-      margin:28px 0 0; padding:24px 0 0; border-top:1px solid #526064;
-      font-family:"Archivo",sans-serif; font-size:clamp(1.45rem,3vw,2.3rem); line-height:1.12;
-    }
-    .lookup {
-      border:1px solid #526064; padding:22px;
-      font-family:"IBM Plex Mono",monospace; font-size:.78rem; overflow-wrap:anywhere;
-    }
-    .lookup a { color:var(--pine); }
-    .example-wrap { overflow-x:auto; border:1px solid var(--line); background:var(--panel); }
-    table { width:100%; border-collapse:collapse; min-width:720px; font-size:.9rem; }
-    th,td { padding:14px 15px; text-align:left; border-bottom:1px solid var(--line); }
-    th { font-family:"IBM Plex Mono",monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    .btn svg { transition:transform .2s var(--ease); }
+    .btn:active { transform:translateY(1px); }
+    .hero-stats { display:grid; padding-inline:24px; border-radius:var(--radius); color:var(--on-deep); background:var(--deep); box-shadow:var(--shadow); }
+    .hero-stats .stat { padding-block:26px; border-bottom:1px solid var(--deep-line); }
+    .hero-stats .stat:last-child { border:0; }
+    .big { display:block; font:500 clamp(2.25rem,9vw,3rem)/1.2 var(--mono); letter-spacing:-.065em; font-variant-numeric:tabular-nums; }
+    .hero-stats .small { display:block; max-width:26ch; margin-top:8px; color:var(--deep-muted); }
+    .hero-stats .stat:last-child .big { color:var(--deep-accent); }
+    .count { position:relative; display:block; white-space:nowrap; }
+    .count-live { display:none; position:absolute; inset:0; }
+    .is-counting .count-final { color:transparent; }
+    .is-counting .count-live { display:block; }
+    .section-head { display:grid; gap:24px; margin-bottom:32px; }
+    .section-copy { max-width:41rem; color:var(--muted); line-height:1.75; }
+    .section-head .eyebrow { margin-bottom:16px; }
+    .law { display:grid; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); overflow:hidden; box-shadow:var(--shadow); }
+    .law-main,.law-side { padding:24px; }
+    .law-number { margin-bottom:24px; color:var(--pine); font:500 clamp(3rem,15vw,6.5rem)/1 var(--mono); letter-spacing:-.085em; }
+    .law p { line-height:1.75; }
+    .law-side { background:var(--pine-soft); border-top:1px solid var(--line); }
+    .law-side .mono { margin-bottom:16px; color:var(--pine); }
+    .funnel { border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); overflow:hidden; }
+    .funnel-row { display:grid; grid-template-columns:1fr auto; gap:12px 16px; padding:24px; border-bottom:1px solid var(--line); }
+    .funnel-row:last-child { border-bottom:0; background:var(--pine-soft); }
+    .funnel-num { grid-column:1; grid-row:1; font:500 1.625rem/1.2 var(--mono); letter-spacing:-.045em; font-variant-numeric:tabular-nums; }
+    .funnel-detail { grid-column:1/-1; display:flex; flex-direction:column-reverse; gap:16px; }
+    .funnel-percent { grid-column:2; grid-row:1; align-self:center; color:var(--muted); text-align:right; }
+    .funnel-label { font-size:1rem; line-height:1.5; }
+    .bar-track { height:6px; background:var(--line); border-radius:2px; overflow:hidden; }
+    .bar { height:100%; background:var(--pine); transform-origin:left; }
+    .funnel-row:last-child .funnel-num,.funnel-row:last-child .funnel-percent { color:var(--pine); }
+    .districts { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+    .tag { padding:10px 12px; border:1px solid var(--line); border-radius:4px; font: .75rem/1.5 var(--mono); color:var(--muted); }
+    .check { color:var(--on-deep); background:var(--deep); --focus:var(--deep-accent); }
+    .check .eyebrow { color:var(--deep-accent); }
+    .check-grid { display:grid; gap:40px; }
+    .check blockquote { margin:28px 0 0; padding-top:28px; border-top:1px solid var(--deep-line); max-width:32rem; font-size:clamp(1.25rem,4.7vw,1.875rem); line-height:1.5; letter-spacing:-.025em; }
+    .check p { color:var(--deep-muted); line-height:1.75; }
+    .lookup { margin-top:28px; padding:24px; border:1px solid var(--deep-line); border-radius:var(--radius); font: .8125rem/1.8 var(--mono); overflow-wrap:anywhere; }
+    .lookup-title { display:flex; align-items:center; justify-content:space-between; gap:12px; color:var(--deep-muted); }
+    .lookup a { display:flex; align-items:center; min-height:48px; padding-block:12px; color:var(--deep-accent); }
+    .lookup p { margin-top:12px; color:var(--on-deep); }
+    .example-label { color:var(--rust); margin-bottom:16px; }
+    .table-shell { position:relative; }
+    .table-shell.is-scrollable::after { content:""; position:absolute; top:1px; bottom:14px; right:1px; width:24px; pointer-events:none; background:linear-gradient(90deg,transparent,#193c2d22); }
+    .example-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); scrollbar-color:var(--pine) var(--pine-soft); scrollbar-width:thin; }
+    table { width:100%; min-width:1000px; border-collapse:separate; border-spacing:0; font-size:.875rem; }
+    th,td { padding:22px 20px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+    th { background:var(--pine-soft); color:var(--muted); font:500 .75rem/1.4 var(--mono); text-transform:uppercase; letter-spacing:.035em; }
+    td:first-child,th:first-child { position:sticky; left:0; z-index:1; border-right:1px solid var(--line); }
+    td:first-child { background:var(--panel); font-weight:600; }
+    td:nth-child(4),td:nth-child(5),td:nth-child(6) { font-family:var(--mono); font-size:.8125rem; }
     tr:last-child td { border-bottom:0; }
-    .example-label { margin-bottom:10px; color:var(--rust); }
-    .pricing {
-      display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line); background:var(--panel);
+    .table-hint { display:flex; align-items:center; gap:8px; min-height:32px; margin-top:12px; color:var(--muted); font: .75rem/1.5 var(--mono); }
+    .table-hint svg { width:18px; }
+    .table-hint[hidden] { display:none; }
+    .pricing { display:grid; gap:16px; }
+    .price-box { padding:28px 24px; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); box-shadow:var(--shadow); }
+    .price-box h3 { margin-bottom:28px; color:var(--muted); }
+    .price { color:var(--pine); font:500 clamp(3.25rem,13vw,4.75rem)/1 var(--mono); letter-spacing:-.08em; font-variant-numeric:tabular-nums; }
+    .price-sub { margin-top:16px; min-height:3.2em; color:var(--muted); font-size:.9375rem; }
+    ul.clean { list-style:none; padding:0; margin:28px 0 0; }
+    ul.clean li { position:relative; padding:18px 0 18px 24px; border-top:1px solid var(--line); font-size:.9375rem; line-height:1.65; }
+    ul.clean li::before { content:"+"; position:absolute; left:0; color:var(--pine); font-family:var(--mono); }
+    .price-box.featured { --line:var(--deep-line); --pine:var(--deep-accent); --muted:var(--deep-muted); color:var(--on-deep); background:var(--deep); border-color:var(--deep); }
+    .price-note { margin-top:20px; }
+    .honest { background:var(--rust-soft); }
+    .honest .eyebrow { color:var(--rust); }
+    .honest-grid { display:grid; gap:32px; }
+    .honest ul { list-style:none; margin:0; padding:0; }
+    .honest li { padding:24px 0; border-top:1px solid var(--rust); line-height:1.7; }
+    .honest li:last-child { padding-bottom:0; }
+    .honest strong { display:block; margin-bottom:8px; font-size:1.0625rem; line-height:1.45; letter-spacing:-.02em; }
+    .stat-strip { display:grid; gap:1px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--line); }
+    .stat-strip .stat { padding:28px 24px; background:var(--panel); }
+    .stat-strip .big { color:var(--pine); font-size:2.5rem; }
+    .stat-strip .small { display:block; margin-top:12px; }
+    footer { padding-block:32px; }
+    .footer-row { display:flex; flex-direction:column; gap:20px; color:var(--muted); font-size:.8125rem; line-height:1.7; }
+    .footer-row strong { color:var(--ink); letter-spacing:-.04em; }
+    .reveal-pending { opacity:0; transform:translateY(12px); }
+    [data-reveal] { transition:opacity .42s var(--ease),transform .42s var(--ease); }
+    @media (hover:hover) {
+      .btn:hover svg { transform:translateX(4px); }
+      .btn.alt:hover,.icon-button:hover,.theme-toggle:hover { border-color:var(--pine); background:var(--pine-soft); }
+      .desktop-nav a:hover,.mobile-nav a:hover { color:var(--pine); }
+      .lookup a:hover { text-decoration-thickness:2px; }
     }
-    .price-box { padding:34px; }
-    .price-box + .price-box { border-left:1px solid var(--line); }
-    .price { font-family:"IBM Plex Mono",monospace; font-size:clamp(2.2rem,5vw,4rem); color:var(--pine); line-height:1; }
-    .price-sub { color:var(--muted); margin-top:8px; }
-    ul.clean { list-style:none; padding:0; margin:25px 0 0; }
-    ul.clean li { padding:11px 0; border-top:1px solid var(--line); }
-    ul.clean li::before { content:"+"; color:var(--pine); font-family:"IBM Plex Mono",monospace; margin-right:9px; }
-    .honest { background:var(--rust-soft); border-bottom:1px solid var(--line); }
-    .honest-grid { display:grid; grid-template-columns:.7fr 1.3fr; gap:50px; }
-    .honest ul { margin:0; padding:0; list-style:none; }
-    .honest li { padding:18px 0; border-top:1px solid color-mix(in srgb,var(--rust) 35%,transparent); }
-    .honest strong { display:block; font-family:"Archivo",sans-serif; margin-bottom:4px; }
-    footer { padding:32px 0 46px; }
-    .footer-row { display:flex; justify-content:space-between; gap:20px; color:var(--muted); font-size:.85rem; }
-    .districts { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
-    .tag { border:1px solid var(--line); padding:8px 10px; font-family:"IBM Plex Mono",monospace; font-size:.68rem; }
-    @media (max-width:720px) {
-      .wrap { width:min(calc(100% - 28px),var(--max)); }
-      section { padding:55px 0; }
-      .hero { padding:65px 0 55px; }
-      .stat-strip,.section-head,.law,.check-grid,.pricing,.honest-grid { grid-template-columns:1fr; }
-      .stat,.stat:nth-child(2),.stat:last-child { border-right:0; border-bottom:1px solid var(--line); padding:18px 0; }
-      .stat:last-child { border-bottom:0; }
-      .law-side,.price-box + .price-box { border-left:0; border-top:1px solid var(--line); }
-      .law-main,.law-side,.price-box { padding:24px; }
-      .section-head { gap:18px; margin-bottom:30px; }
-      .funnel-row { grid-template-columns:70px 1fr 62px; gap:10px; }
-      .funnel-num { font-size:1rem; }
-      .funnel-label { font-size:.9rem; }
-      .funnel-note { font-size:.76rem; }
-      .footer-row { flex-direction:column; }
+    @media (min-width:400px) {
+      .cta-row .btn { flex:0 1 auto; gap:16px; padding-inline:16px; }
+    }
+    @media (min-width:600px) {
+      .wrap { width:min(calc(100% - 64px),1248px); }
+      .hero { padding-block:64px; }
+      section { padding-block:80px; }
+      .hero-stats { grid-template-columns:repeat(3,minmax(0,1fr)); padding:0; }
+      .hero-stats .stat { padding:28px 20px; border-bottom:0; border-right:1px solid var(--deep-line); }
+      .hero-stats .big { font-size:clamp(1.375rem,3.6vw,2.5rem); }
+      .hero-stats .small { font-size:.8125rem; }
+      .theme-toggle { width:96px; padding-inline:12px; }
+      .theme-label { display:inline; }
+      .funnel-row { grid-template-columns:88px minmax(0,1fr) 60px; gap:24px; align-items:center; padding:24px 32px; }
+      .funnel-detail { grid-column:2; grid-row:1; }
+      .funnel-percent { grid-column:3; }
+      .law-main,.law-side,.price-box { padding:32px; }
+      .stat-strip { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .stat-strip .big { font-size:clamp(1.75rem,4vw,2.75rem); }
+      [data-reveal] { transition-duration:.65s; }
+      .reveal-pending { transform:translateY(20px); }
+    }
+    @media (min-width:900px) {
+      .section-head { grid-template-columns:1.1fr 1fr; align-items:end; gap:72px; margin-bottom:40px; }
+      .section-head.fact-head { grid-template-columns:.65fr 1.35fr; align-items:start; }
+      .law { grid-template-columns:1.15fr 1fr; }
+      .law-side { display:flex; flex-direction:column; justify-content:center; border-top:0; border-left:1px solid var(--line); }
+      .check-grid { grid-template-columns:1.1fr 1fr; gap:72px; }
+      .check-details { padding-top:42px; }
+      .pricing { grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+      .price-box { padding:40px; }
+      .honest-grid { grid-template-columns:.8fr 1.2fr; gap:80px; }
+      .honest-heading { position:sticky; top:116px; align-self:start; }
+      .footer-row { flex-direction:row; justify-content:space-between; gap:48px; }
+    }
+    @media (min-width:1100px) {
+      .header-inner { min-height:88px; }
+      .desktop-nav { display:flex; align-items:center; gap:32px; margin-right:24px; }
+      .desktop-nav a { display:inline-flex; align-items:center; min-height:48px; font: .8125rem/1.5 var(--mono); text-decoration:none; }
+      .menu-toggle { display:none; }
+      section { padding-block:104px; }
+      .hero { padding-top:80px; padding-bottom:80px; }
+      .hero-grid { grid-template-columns:minmax(0,1fr) 320px; align-items:center; gap:64px; }
+      h1 { font-size:clamp(4rem,6.15vw,5.625rem); }
+      .hero .eyebrow { margin-bottom:32px; }
+      .lede { margin-top:32px; font-size:1.125rem; }
+      .cta-row { margin-top:40px; }
+      .hero-stats { grid-template-columns:1fr; padding:8px 32px; }
+      .hero-stats .stat { padding:32px 0; border-right:0; border-bottom:1px solid var(--deep-line); }
+      .hero-stats .big { font-size:2.625rem; }
+      .hero-stats .small { font-size:.875rem; }
+      .law-main,.law-side { padding:40px; }
+      .stat-strip .stat { padding:36px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *,*::before,*::after { animation:none !important; transition:none !important; }
+      .reveal-pending { opacity:1; transform:none; }
+    }
+    @media print {
+      .site-header,.skip-link,.menu,.cta-row,.table-hint { display:none !important; }
+      html,html.dark { --bg:#fff; --panel:#fff; --ink:#17232A; --muted:#4C5B60; --pine:#244C3B; }
+      .hero-stats,.check,.price-box.featured { --deep:#fff; --on-deep:#17232A; --deep-muted:#4C5B60; --deep-accent:#244C3B; --deep-line:#CBD2CC; }
+      section { padding-block:24px; }
+      .wrap { width:100%; }
+      .reveal-pending { opacity:1; transform:none; }
+      .count-final { color:inherit !important; }
+      .count-live { display:none !important; }
+      .example-wrap { overflow:visible; }
+      table { min-width:0; font-size:8pt; }
+      th,td { padding:8px 4px; white-space:normal; }
+      .honest-heading { position:static; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <a class="logo" href="#">LAST<span>PERMIT</span></a>
-      <button class="theme-toggle" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Switch theme">
-        <span class="theme-icon" aria-hidden="true">☾</span>
-        <span class="theme-label">Dark</span>
-      </button>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="#" aria-label="LASTPERMIT, home">LAST<span>PERMIT</span></a>
+      <div class="header-actions">
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="#price">See the list</a><a href="#check">Check the work</a><a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" hidden>
+          <span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Dark</span>
+        </button>
+        <button class="icon-button menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" aria-haspopup="dialog" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h18M3 16h18"/></svg>
+        </button>
+      </div>
     </div>
   </header>
-
-  <main>
-    <section class="hero">
-      <div class="wrap">
-        <div class="eyebrow mono">ORLANDO · ROOF AGE · VERIFIED ADDRESSES</div>
-        <h1>Houses with old roofs.<br>Already filtered.</h1>
-        <p class="lede">We take Orlando's roof permits, check each house against later permits, and remove the ones already re-roofed. What remains is a list of houses with a known 14–18-year-old roof.</p>
-        <div class="cta-row">
-          <a class="btn" href="#price">See the list</a>
-          <a class="btn alt" href="#check">Check the work</a>
+  <dialog class="menu" id="mobileMenu" aria-labelledby="menuTitle">
+    <div class="menu-panel">
+      <div class="menu-top"><span class="menu-title" id="menuTitle">LASTPERMIT</span><button class="icon-button" id="menuClose" type="button" aria-label="Close navigation menu" autofocus><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#price">See the list</a><a href="#check">Check the work</a><a href="#contact">Contact</a></nav>
+    </div>
+  </dialog>
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">ORLANDO · ROOF AGE · VERIFIED ADDRESSES</div>
+          <h1 id="heroTitle">Houses with old roofs.<br><span>Already filtered.</span></h1>
+          <p class="lede">We take Orlando's roof permits, check each house against later permits, and remove the ones already re-roofed. What remains is a list of houses with a known 14–18-year-old roof.</p>
+          <div class="cta-row">
+            <a class="btn" href="#price">See the list <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+            <a class="btn alt" href="#check">Check the work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a>
+          </div>
         </div>
-        <div class="stat-strip">
-          <div class="stat"><span class="big">87,764</span><span class="small">roof permits in the source record, 1992–2026</span></div>
-          <div class="stat"><span class="big">2,218</span><span class="small">houses surviving the citywide filtering</span></div>
-          <div class="stat"><span class="big">68 / 100</span><span class="small">candidate houses thrown away</span></div>
+        <div class="hero-stats" data-reveal>
+          <div class="stat"><span class="big count" data-count="87764"><span class="count-final">87,764</span><span class="count-live" aria-hidden="true"></span></span><span class="small">roof permits in the source record, 1992–2026</span></div>
+          <div class="stat"><span class="big count" data-count="2218"><span class="count-final">2,218</span><span class="count-live" aria-hidden="true"></span></span><span class="small">houses surviving the citywide filtering</span></div>
+          <div class="stat"><span class="big count" data-count="68" data-suffix=" / 100"><span class="count-final">68 / 100</span><span class="count-live" aria-hidden="true"></span></span><span class="small">candidate houses thrown away</span></div>
         </div>
       </div>
     </section>
-
-    <section>
+    <section aria-labelledby="factTitle">
       <div class="wrap">
-        <div class="section-head">
-          <div class="eyebrow mono">THE 15-YEAR FACT</div>
+        <div class="section-head fact-head" data-reveal>
+          <h2 class="eyebrow" id="factTitle">THE 15-YEAR FACT</h2>
           <div class="section-copy">Florida's roof-insurance rule gives homeowners a statutory protection based on roof age. At 15 years, that age-based protection ends. It does not mean an insurer must drop the homeowner.</div>
         </div>
-        <div class="law">
-          <div class="law-main">
-            <div class="law-number">15 years</div>
-            <p><strong>Florida Statute 627.7011(5)</strong> says an insurer may not refuse to issue or renew a homeowner's policy on a roof less than 15 years old on age grounds alone.</p>
-          </div>
-          <div class="law-side">
-            <div class="mono">What expires</div>
-            <p>The statutory shield. A homeowner can still have the roof inspected at their own expense, and a roof shown to have 5+ years of useful life remaining stays protected.</p>
-          </div>
+        <div class="law" data-reveal>
+          <div class="law-main"><div class="law-number">15 years</div><p><strong>Florida Statute 627.7011(5)</strong> says an insurer may not refuse to issue or renew a homeowner's policy on a roof less than 15 years old on age grounds alone.</p></div>
+          <div class="law-side"><h3 class="mono">What expires</h3><p>The statutory shield. A homeowner can still have the roof inspected at their own expense, and a roof shown to have 5+ years of useful life remaining stays protected.</p></div>
         </div>
       </div>
     </section>
-
-    <section>
+    <section aria-labelledby="filterTitle">
       <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow mono">THE FILTER</div>
-            <h2>2,065 houses entered. 660 made the list.</h2>
-          </div>
+        <div class="section-head" data-reveal>
+          <div><div class="eyebrow">THE FILTER</div><h2 id="filterTitle">2,065 houses entered. 660 made the list.</h2></div>
           <div class="section-copy">District 3. Roof permits from 2008–2012. Every address was checked against later permits, then screened down to the houses we can stand behind.</div>
         </div>
-        <div class="funnel">
-          <div class="funnel-row">
-            <div class="funnel-num">2,065</div>
-            <div><div class="bar-track"><div class="bar" style="width:100%"></div></div><div class="funnel-label">houses with a roof permit in the window</div></div>
-            <div class="mono">100%</div>
-          </div>
-          <div class="funnel-row">
-            <div class="funnel-num">1,019</div>
-            <div><div class="bar-track"><div class="bar" style="width:49.3%"></div></div><div class="funnel-label">still on the same roof</div></div>
-            <div class="mono">49.3%</div>
-          </div>
-          <div class="funnel-row">
-            <div class="funnel-num">969</div>
-            <div><div class="bar-track"><div class="bar" style="width:46.9%"></div></div><div class="funnel-label">after churches, schools, condos and shops come out</div></div>
-            <div class="mono">46.9%</div>
-          </div>
-          <div class="funnel-row">
-            <div class="funnel-num">802</div>
-            <div><div class="bar-track"><div class="bar" style="width:38.8%"></div></div><div class="funnel-label">after removing roofs whose age we cannot stand behind</div></div>
-            <div class="mono">38.8%</div>
-          </div>
-          <div class="funnel-row">
-            <div class="funnel-num">660</div>
-            <div><div class="bar-track"><div class="bar" style="width:32%"></div></div><div class="funnel-label"><strong>owner-occupied addresses delivered</strong></div></div>
-            <div class="mono">32.0%</div>
-          </div>
+        <div class="funnel" data-reveal>
+          <div class="funnel-row"><div class="funnel-num">2,065</div><div class="funnel-detail"><div class="bar-track" aria-hidden="true"><div class="bar" style="width:100%"></div></div><div class="funnel-label">houses with a roof permit in the window</div></div><div class="mono funnel-percent">100%</div></div>
+          <div class="funnel-row"><div class="funnel-num">1,019</div><div class="funnel-detail"><div class="bar-track" aria-hidden="true"><div class="bar" style="width:49.3%"></div></div><div class="funnel-label">still on the same roof</div></div><div class="mono funnel-percent">49.3%</div></div>
+          <div class="funnel-row"><div class="funnel-num">969</div><div class="funnel-detail"><div class="bar-track" aria-hidden="true"><div class="bar" style="width:46.9%"></div></div><div class="funnel-label">after churches, schools, condos and shops come out</div></div><div class="mono funnel-percent">46.9%</div></div>
+          <div class="funnel-row"><div class="funnel-num">802</div><div class="funnel-detail"><div class="bar-track" aria-hidden="true"><div class="bar" style="width:38.8%"></div></div><div class="funnel-label">after removing roofs whose age we cannot stand behind</div></div><div class="mono funnel-percent">38.8%</div></div>
+          <div class="funnel-row"><div class="funnel-num">660</div><div class="funnel-detail"><div class="bar-track" aria-hidden="true"><div class="bar" style="width:32%"></div></div><div class="funnel-label"><strong>owner-occupied addresses delivered</strong></div></div><div class="mono funnel-percent">32.0%</div></div>
         </div>
-        <div class="districts">
-          <span class="tag">D1 · 486 / 933 · 52%</span>
-          <span class="tag">D3 · 660 / 2,065 · 32%</span>
-          <span class="tag">D4 · 532 / 1,874 · 28%</span>
+        <div class="districts" data-reveal><span class="tag">D1 · 486 / 933 · 52%</span><span class="tag">D3 · 660 / 2,065 · 32%</span><span class="tag">D4 · 532 / 1,874 · 28%</span></div>
+      </div>
+    </section>
+    <section class="check" id="check" aria-labelledby="checkTitle" tabindex="-1">
+      <div class="wrap check-grid">
+        <div data-reveal><div class="eyebrow">CHECK IT YOURSELF</div><h2 id="checkTitle">Don't take my word for it.</h2><blockquote>Every row has the permit number. Put it into the city's lookup and you will see exactly what I saw.</blockquote></div>
+        <div class="check-details" data-reveal>
+          <p>Orlando's permit records are public. We are not selling access to them. We are selling the work of joining the history back onto itself and throwing out the houses that have already been done.</p>
+          <div class="lookup"><div class="lookup-title">CITY PERMIT LOOKUP <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div><a href="https://permitlookup.cityoforlando.net/" target="_blank" rel="noopener">permitlookup.cityoforlando.net<span class="sr-only"> (opens in a new tab)</span></a><p>Your spreadsheet carries the permit number for every address.</p></div>
         </div>
       </div>
     </section>
-
-    <section class="check">
+    <section aria-labelledby="rowsTitle">
       <div class="wrap">
-        <div class="check-grid">
-          <div>
-            <div class="eyebrow mono">CHECK IT YOURSELF</div>
-            <h2>Don't take my word for it.</h2>
-            <blockquote>Every row has the permit number. Put it into the city's lookup and you will see exactly what I saw.</blockquote>
-          </div>
-          <div>
-            <p>Orlando's permit records are public. We are not selling access to them. We are selling the work of joining the history back onto itself and throwing out the houses that have already been done.</p>
-            <div class="lookup">
-              CITY PERMIT LOOKUP<br><br>
-              <a href="https://permitlookup.cityoforlando.net/" target="_blank" rel="noopener">permitlookup.cityoforlando.net</a><br><br>
-              Your spreadsheet carries the permit number for every address.
+        <div class="section-head" data-reveal><div><div class="eyebrow">WHAT IS IN A ROW</div><h2 id="rowsTitle">Enough to work the address. Enough to verify it.</h2></div><div class="section-copy">Every delivered row includes the permit trail and the contact fields needed to work it. Example addresses below are fictional and are not client data.</div></div>
+        <div data-reveal>
+          <div class="example-label mono" id="exampleLabel">EXAMPLE ROWS · NOT REAL CLIENT DATA</div>
+          <div class="table-shell">
+            <div class="example-wrap" id="exampleTable" tabindex="0" role="region" aria-labelledby="exampleLabel" aria-describedby="tableHint">
+              <table>
+                <caption class="sr-only">Example address data</caption>
+                <thead><tr><th scope="col">Address</th><th scope="col">Neighbourhood</th><th scope="col">Roof permit</th><th scope="col">Age</th><th scope="col">Cost then</th><th scope="col">Permit no.</th><th scope="col">Owner</th><th scope="col">Phone</th></tr></thead>
+                <tbody>
+                  <tr><td>123 Example Ave</td><td>District 3</td><td>04/2011</td><td>15.4 yr</td><td>$8,900</td><td>EXAMPLE-001</td><td>Example Owner</td><td>Not real</td></tr>
+                  <tr><td>456 Sample St</td><td>District 3</td><td>09/2009</td><td>17.0 yr</td><td>$6,750</td><td>EXAMPLE-002</td><td>Sample Owner</td><td>Not real</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
+          <div class="table-hint" id="tableHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>Scroll to see every field</div>
         </div>
       </div>
     </section>
-
-    <section>
+    <section id="price" aria-labelledby="priceTitle" tabindex="-1">
       <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow mono">WHAT IS IN A ROW</div>
-            <h2>Enough to work the address. Enough to verify it.</h2>
-          </div>
-          <div class="section-copy">Every delivered row includes the permit trail and the contact fields needed to work it. Example addresses below are fictional and are not client data.</div>
-        </div>
-        <div class="example-label mono">EXAMPLE ROWS · NOT REAL CLIENT DATA</div>
-        <div class="example-wrap">
-          <table>
-            <thead>
-              <tr><th>Address</th><th>Neighbourhood</th><th>Roof permit</th><th>Age</th><th>Cost then</th><th>Permit no.</th><th>Owner</th><th>Phone</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>123 Example Ave</td><td>District 3</td><td>04/2011</td><td>15.4 yr</td><td>$8,900</td><td>EXAMPLE-001</td><td>Example Owner</td><td>Not real</td></tr>
-              <tr><td>456 Sample St</td><td>District 3</td><td>09/2009</td><td>17.0 yr</td><td>$6,750</td><td>EXAMPLE-002</td><td>Sample Owner</td><td>Not real</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section id="price">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow mono">THE OFFER</div>
-            <h2>No dashboard. No shared leads.</h2>
-          </div>
-          <div class="section-copy">One roofing contractor per Commissioner District. The spreadsheet arrives by email. You can cancel any month.</div>
-        </div>
+        <div class="section-head" data-reveal><div><div class="eyebrow">THE OFFER</div><h2 id="priceTitle">No dashboard. No shared leads.</h2></div><div class="section-copy">One roofing contractor per Commissioner District. The spreadsheet arrives by email. You can cancel any month.</div></div>
         <div class="pricing">
-          <div class="price-box">
-            <div class="mono">FOUNDING RATE</div>
-            <div class="price">$245</div>
-            <div class="price-sub">per month · held for the first two districts</div>
-            <ul class="clean">
-              <li><strong>80 verified addresses</strong> on day one</li>
-              <li><strong>At least 40 new addresses</strong> every month after</li>
-              <li>Removals, re-screened phone numbers and houses newly crossing fifteen years</li>
-              <li>One contractor per Commissioner District</li>
-              <li><strong>$5 credit</strong> for any address you find has already been re-roofed. No limit.</li>
-            </ul>
-          </div>
-          <div class="price-box">
-            <div class="mono">ANNUAL</div>
-            <div class="price">$2,450</div>
-            <div class="price-sub">two months free</div>
-            <ul class="clean">
-              <li>Cancel any month</li>
-              <li>Full refund if requested within the first 30 days</li>
-              <li>Whichever rate you start on, you keep</li>
-              <li>Districts available: 1, 3 and 4</li>
-              <li>Spreadsheet by email. Nothing to log into.</li>
-            </ul>
-          </div>
+          <div class="price-box featured" data-reveal><h3 class="mono">FOUNDING RATE</h3><div class="price">$245</div><div class="price-sub">per month · held for the first two districts</div><ul class="clean"><li><strong>80 verified addresses</strong> on day one</li><li><strong>At least 40 new addresses</strong> every month after</li><li>Removals, re-screened phone numbers and houses newly crossing fifteen years</li><li>One contractor per Commissioner District</li><li><strong>$5 credit</strong> for any address you find has already been re-roofed. No limit.</li></ul></div>
+          <div class="price-box" data-reveal><h3 class="mono">ANNUAL</h3><div class="price">$2,450</div><div class="price-sub">two months free</div><ul class="clean"><li>Cancel any month</li><li>Full refund if requested within the first 30 days</li><li>Whichever rate you start on, you keep</li><li>Districts available: 1, 3 and 4</li><li>Spreadsheet by email. Nothing to log into.</li></ul></div>
         </div>
-        <p class="small" style="margin-top:18px">After the founding allocation, the monthly rate is $395.</p>
+        <p class="small price-note">After the founding allocation, the monthly rate is $395.</p>
       </div>
     </section>
-
-    <section class="honest">
+    <section class="honest" aria-labelledby="honestTitle">
       <div class="wrap honest-grid">
-        <div>
-          <div class="eyebrow mono">THE HONEST PART</div>
-          <h2>Know what you're buying.</h2>
-        </div>
-        <ul>
+        <div class="honest-heading" data-reveal><div class="eyebrow">THE HONEST PART</div><h2 id="honestTitle">Know what you're buying.</h2></div>
+        <ul data-reveal>
           <li><strong>These are not inbound leads.</strong> Nobody on the list asked for a quote. They are houses where the roof age is known and no later roof permit was found.</li>
           <li><strong>It is not every house.</strong> Plenty of re-roofs happen without a permit. This is a filtered subset of what the city has on record, never a census.</li>
           <li><strong>At fifteen, protection expires. Nothing is forced.</strong> The insurance rule does not mean an insurer must drop the homeowner.</li>
@@ -360,53 +380,135 @@
         </ul>
       </div>
     </section>
-
-    <section>
+    <section aria-labelledby="numbersTitle">
       <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow mono">WHY THE NUMBERS WORK</div>
-            <h2>One exclusive contact costs $3.06 in month one.</h2>
-          </div>
-          <div class="section-copy">At $245/month with 80 addresses in the first delivery. By month twelve, with at least 40 new addresses each month, the delivered-address cost falls to about $0.51.</div>
-        </div>
-        <div class="stat-strip">
-          <div class="stat"><span class="big">$3.06</span><span class="small">per exclusive contact in month one</span></div>
-          <div class="stat"><span class="big">~$0.51</span><span class="small">per delivered address by month twelve</span></div>
-          <div class="stat"><span class="big">$25–90</span><span class="small">typical shared marketplace lead price</span></div>
-        </div>
+        <div class="section-head" data-reveal><div><div class="eyebrow">WHY THE NUMBERS WORK</div><h2 id="numbersTitle">One exclusive contact costs $3.06 in month one.</h2></div><div class="section-copy">At $245/month with 80 addresses in the first delivery. By month twelve, with at least 40 new addresses each month, the delivered-address cost falls to about $0.51.</div></div>
+        <div class="stat-strip" data-reveal><div class="stat"><span class="big">$3.06</span><span class="small">per exclusive contact in month one</span></div><div class="stat"><span class="big">~$0.51</span><span class="small">per delivered address by month twelve</span></div><div class="stat"><span class="big">$25–90</span><span class="small">typical shared marketplace lead price</span></div></div>
       </div>
     </section>
   </main>
+  <footer id="contact" tabindex="-1"><div class="wrap footer-row"><div><strong>LASTPERMIT</strong> · Orlando roof-age data, filtered against later permits.</div><div>Contact: use the owner email configured for this site.</div></div></footer>
+  <script>
+    const root = document.documentElement;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const desktop = window.matchMedia('(min-width: 1100px)');
+    const themeButton = document.getElementById('themeToggle');
+    function setTheme(theme) {
+      const dark = theme === 'dark';
+      root.classList.toggle('dark', dark);
+      try { localStorage.setItem('lastpermit-theme', dark ? 'dark' : 'light'); } catch (_) {}
+      themeButton.querySelector('.theme-icon').textContent = dark ? '☀' : '☾';
+      themeButton.querySelector('.theme-label').textContent = dark ? 'Light' : 'Dark';
+      themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    function toggleTheme() { setTheme(root.classList.contains('dark') ? 'light' : 'dark'); }
+    setTheme(root.classList.contains('dark') ? 'dark' : 'light');
+    themeButton.hidden = false;
+    themeButton.addEventListener('click', toggleTheme);
 
-  <footer id="contact">
-    <div class="wrap footer-row">
-      <div><strong>LASTPERMIT</strong> · Orlando roof-age data, filtered against later permits.</div>
-      <div>Contact: use the owner email configured for this site.</div>
-    </div>
-  </footer>
+    const menu = document.getElementById('mobileMenu');
+    const menuButton = document.getElementById('menuToggle');
+    const closeButton = document.getElementById('menuClose');
+    let closeTimer;
+    let menuDestination = null;
+    function finishClose() {
+      clearTimeout(closeTimer);
+      if (!menu.open) return;
+      menu.close();
+      menu.classList.remove('is-closing');
+      root.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      if (menuDestination) {
+        const destination = document.querySelector(menuDestination);
+        try { history.pushState(null, '', menuDestination); } catch (_) { location.hash = menuDestination; }
+        destination.focus({ preventScroll:true });
+        destination.scrollIntoView({ behavior:motion.matches ? 'instant' : 'smooth', block:'start' });
+        menuDestination = null;
+      } else {
+        (desktop.matches ? themeButton : menuButton).focus({ preventScroll:true });
+      }
+    }
+    function closeMenu(destination = null) {
+      if (!menu.open || menu.classList.contains('is-closing')) return;
+      menuDestination = destination;
+      if (motion.matches) { finishClose(); return; }
+      menu.classList.add('is-closing');
+      closeTimer = window.setTimeout(finishClose, 190);
+    }
+    if (typeof menu.showModal === 'function') {
+      menuButton.hidden = false;
+      menuButton.addEventListener('click', () => {
+        menu.showModal();
+        root.classList.add('menu-open');
+        menuButton.setAttribute('aria-expanded', 'true');
+        closeButton.focus();
+      });
+    }
+    closeButton.addEventListener('click', () => closeMenu());
+    menu.addEventListener('click', event => { if (event.target === menu) closeMenu(); });
+    menu.addEventListener('cancel', event => { event.preventDefault(); closeMenu(); });
+    menu.querySelectorAll('nav a').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault(); closeMenu(link.getAttribute('href'));
+    }));
+    menu.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const items = [...menu.querySelectorAll('button,a[href]')];
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
+    desktop.addEventListener('change', () => { if (desktop.matches && menu.open) finishClose(); });
 
-<script>
-  function setTheme(theme) {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('lastpermit-theme', theme);
+    let revealObserver, countObserver;
+    const activeCounters = new Map();
+    function animateCount(element) {
+      const live = element.querySelector('.count-live');
+      const target = Number(element.dataset.count);
+      const suffix = element.dataset.suffix || '';
+      const duration = window.innerWidth < 600 ? 650 : 1000;
+      const start = performance.now();
+      element.classList.add('is-counting');
+      function frame(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        live.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3))).toLocaleString('en-US') + suffix;
+        if (progress < 1 && !motion.matches) activeCounters.set(element, requestAnimationFrame(frame));
+        else { element.classList.remove('is-counting'); live.textContent = ''; activeCounters.delete(element); }
+      }
+      frame(start);
+    }
+    if ('IntersectionObserver' in window && !motion.matches) {
+      revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.remove('reveal-pending'); revealObserver.unobserve(entry.target); }
+      }), { threshold:0, rootMargin:'0px 0px -24px 0px' });
+      document.querySelectorAll('[data-reveal]').forEach(element => {
+        element.classList.add('reveal-pending'); revealObserver.observe(element);
+      });
+      countObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) { animateCount(entry.target); countObserver.unobserve(entry.target); }
+      }), { threshold:.8 });
+      document.querySelectorAll('[data-count]').forEach(element => countObserver.observe(element));
+    }
+    motion.addEventListener('change', () => {
+      if (!motion.matches) return;
+      revealObserver?.disconnect(); countObserver?.disconnect();
+      document.querySelectorAll('.reveal-pending').forEach(element => element.classList.remove('reveal-pending'));
+      activeCounters.forEach((frame, element) => { cancelAnimationFrame(frame); element.classList.remove('is-counting'); });
+      activeCounters.clear();
+      if (menu.classList.contains('is-closing')) finishClose();
+    });
 
-    const dark = theme === 'dark';
-    document.querySelector('.theme-icon').textContent = dark ? '☀' : '☾';
-    document.querySelector('.theme-label').textContent = dark ? 'Light' : 'Dark';
-    document.getElementById('themeToggle').setAttribute(
-      'aria-label',
-      dark ? 'Switch to light mode' : 'Switch to dark mode'
-    );
-  }
-
-  function toggleTheme() {
-    setTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark');
-  }
-
-  const savedTheme = localStorage.getItem('lastpermit-theme');
-  setTheme(savedTheme || 'light');
-</script>
-
+    const tableRegion = document.getElementById('exampleTable');
+    const tableHint = document.getElementById('tableHint');
+    function updateTable() {
+      const scrollable = tableRegion.scrollWidth > tableRegion.clientWidth + 1;
+      tableHint.hidden = !scrollable;
+      tableRegion.tabIndex = scrollable ? 0 : -1;
+      tableRegion.parentElement.classList.toggle('is-scrollable', scrollable && tableRegion.scrollLeft < tableRegion.scrollWidth - tableRegion.clientWidth - 2);
+    }
+    tableRegion.addEventListener('scroll', updateTable, { passive:true });
+    if ('ResizeObserver' in window) new ResizeObserver(updateTable).observe(tableRegion);
+    else window.addEventListener('resize', updateTable, { passive:true });
+    updateTable();
+  </script>
 </body>
 </html>
